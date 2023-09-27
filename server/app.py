@@ -20,11 +20,15 @@ def index():
 
 @app.route('/bakeries')
 def bakeries():
-    return ''
+    bakeries_data =[]
+    return jsonify(bakeries_data)
 
 @app.route('/bakeries/<int:id>')
-def bakery_by_id(id):
-    return ''
+def bakery_by(id):
+   bakery=Bakery.query.filter_by(id=id).first()
+   response_body = bakery.to_dict()
+   response = make_response(response_body, 200)
+   return response
 
 @app.route('/baked_goods/by_price')
 def baked_goods_by_price():
